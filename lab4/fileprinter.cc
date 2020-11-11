@@ -56,8 +56,8 @@ void FilePrinter::fileInfo(std::string const& dir) const {
               << getpwuid(buf.st_uid)->pw_name << " " 
               << getgrgid(buf.st_gid)->gr_name << " "
               << std::setw(8) << std::right << buf.st_size << "B " 
-              << std::put_time(std::localtime(&buf.st_birthtimespec.tv_sec), "%b %d %R") 
-              << " " << dir.substr(dir.find_last_of('/') + 1) << "\n";
+              << std::put_time(std::localtime(&buf.st_mtimespec.tv_sec), "%b %d %R") << " "
+              << dir.substr(dir.find_last_of('/') + 1) << "\n";
 }
 
 std::string FilePrinter::parseMode(mode_t mode) const {

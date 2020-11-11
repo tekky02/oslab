@@ -9,7 +9,7 @@
 #define __FILEPRINTER_HH__
 
 #include <string>
-#include <dirent.h>
+#include <sys/types.h>
 
 class FilePrinter {
 
