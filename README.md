@@ -3,6 +3,7 @@
 ## lab1[useage of pipe]
 
 The final image based on Alpine has been pushed to my public repository on Docker Hub.
+
 You are recommended to run the following command directly!
 
 ```shell
