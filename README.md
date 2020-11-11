@@ -1,9 +1,18 @@
-# 操作系统实验
+# Operating System lab
 
-## 实验一[管道及其使用]
+## lab1[useage of pipe]
 
-## 实验二[进程、线程 同步、互斥]
+The final image based on Alpine has been pushed to my public repository on Docker Hub.
+You are recommended to run the following command directly!
 
-## 实验三[共享缓冲区、环形缓冲]
+'''shell
+$ docker run --rm -it tekky03/os-lab1:0.1
+'''
 
-## 实验四[Linux 文件系统]
+## lab2[process&threads synchronization]
+
+## lab3[ring buffer]
+
+## lab4[linux filesystem]
+
+
