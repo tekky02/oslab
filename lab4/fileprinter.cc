@@ -7,8 +7,11 @@
 
 #include <iostream>
 #include <iomanip> // put_time
-#include <ctime>
+#include <ctime>   // localtime...
+#include <sstream> // for stringstream class.
 #include <unistd.h>
+#include <pwd.h>    // get username from uid
+#include <grp.h>    // get group name from gid
 #include <dirent.h>
 #include <sys/stat.h>
 #include "fileprinter.hh"
@@ -41,15 +44,34 @@ void FilePrinter::print(std::string const& path) const {
             fileInfo(tempdir);
         }
     }
+    std::cout << std::endl;
     closedir(dir);
 }
 
 void FilePrinter::fileInfo(std::string const& dir) const {
     struct stat buf;
     lstat(dir.c_str(), &buf);
-    std::cout << buf.st_mode << "\t" << buf.st_uid << " " << buf.st_gid << " "
-              << buf.st_size << "\t" 
+    std::cout << parseMode(buf.st_mode) << " "
+              << std::setw(2) << std::right << buf.st_nlink << " "
+              << getpwuid(buf.st_uid)->pw_name << " " 
+              << getgrgid(buf.st_gid)->gr_name << " "
+              << std::setw(8) << std::right << buf.st_size << "B " 
               << std::put_time(std::localtime(&buf.st_birthtimespec.tv_sec), "%b %d %R") 
-              << " "
-              << dir.substr(dir.find_last_of('/') + 1) << "\n";
+              << " " << dir.substr(dir.find_last_of('/') + 1) << "\n";
+}
+
+std::string FilePrinter::parseMode(mode_t mode) const {
+    std::stringstream modstr;
+
+    modstr << (S_ISDIR(mode)   ? 'd' : '-')
+           << (mode & S_IRUSR  ? 'r' : '-')
+           << (mode & S_IWUSR  ? 'w' : '-')
+           << (mode & S_IXUSR  ? 'x' : '-')
+           << (mode & S_IRGRP  ? 'r' : '-')
+           << (mode & S_IWGRP  ? 'w' : '-')
+           << (mode & S_IXGRP  ? 'x' : '-')
+           << (mode & S_IROTH  ? 'r' : '-')
+           << (mode & S_IWOTH  ? 'w' : '-')
+           << (mode & S_IXOTH  ? 'x' : '-');
+    return modstr.str();
 }

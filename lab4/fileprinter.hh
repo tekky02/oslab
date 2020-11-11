@@ -20,7 +20,9 @@ public:
 private:
     void print(std::string const&) const; // print file info recursively
     void fileInfo(std::string const& dir) const;
+    std::string parseMode(mode_t mode) const;
 
+private:
     std::string directory;
 };
 
