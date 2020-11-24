@@ -55,8 +55,12 @@ void FilePrinter::fileInfo(std::string const& dir) const {
               << std::setw(2) << std::right << buf.st_nlink << " "
               << getpwuid(buf.st_uid)->pw_name << " " 
               << getgrgid(buf.st_gid)->gr_name << " "
-              << std::setw(8) << std::right << buf.st_size << "B " 
+              << std::setw(8) << std::right << buf.st_size << "B "
+            #if __macos__
               << std::put_time(std::localtime(&buf.st_mtimespec.tv_sec), "%b %d %R") << " "
+            #elif __linux__
+              << std::put_time(std::localtime(&buf.st_ctim.tv_sec), "%b %d %R") << " "
+            #endif
               << dir.substr(dir.find_last_of('/') + 1) << "\n";
 }
 
