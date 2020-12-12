@@ -20,7 +20,6 @@ enum Auth { owner, slave };
 
 // shared memory based ring buffer.
 // NOTE: here type T must be POD type.
-// NOTE: not thread safe now...
 template <typename T>
 class ShmRingBuffer {
 public:

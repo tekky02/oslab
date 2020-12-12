@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
     const int semid = std::atoi(argv[0]);
     ShmRingBuffer<Message> buf(semid, Auth::owner);
     Message msg;
-    std::ifstream fin("testfile.out");
+    std::ifstream fin("infile.out");
     while (!fin.eof()) {
         if (fin.eof()) break;
         fin.getline(msg.msg, MAX_SIZE);

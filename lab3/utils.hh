@@ -17,4 +17,16 @@ typedef struct {
     char msg[MAX_SIZE];
 } Message;
 
+#if __macos__
+
+#elif __linux__
+// definition for the unimplement type union semun
+union semun {
+    int               val;   // value for SETALL.
+    struct semid_ds * buf;   // buffer for IPC_STAT, IPC_SET.
+    unsigned short  * array; // array for SETALL, GEGALL.
+    struct seminfo  * __buf; // buffer for IPC_INFO.
+};
+#endif
+
 #endif /* __UTILS_HH__ */

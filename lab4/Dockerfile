@@ -8,6 +8,8 @@ RUN c++ -std=c++17 -o main main.cc fileprinter.cc
 
 FROM alpine:latest
 
-COPY --from=builder /root/* .
+WORKDIR /root/
 
-CMD ["./main"]
+RUN apk add --no-cache libstdc++
+
+COPY --from=builder /root/main .
