@@ -10,10 +10,21 @@ You are recommended to run the following command directly!
 $ docker run --rm -it tekky03/os-lab1:0.1
 ```
 
-## #lab2 [process&threads synchronization]
+## lab2 [process&threads synchronization]
 
-## #lab3 [ring buffer]
+```shell
+docker run --rm -it tekky03/os-lab2:0.1
+```
 
-## #lab4 [linux filesystem]
+## lab3 [ring buffer]
 
+```shell
+docker run --rm -it tekky03/os-lab3:0.1 /bin/sh
+# ./main
+```
 
+## lab4 [linux filesystem]
+
+```shell
+docker run --rm -it tekky03/os-lab4:0.1 /bin/sh
+```
